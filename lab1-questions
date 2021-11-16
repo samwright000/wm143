@@ -1,0 +1,33 @@
+1) Change the the ip address of the destination to 203.0.113.1 - Done
+
+2) Change the source ip address to match the you VM guest's ip address
+
+3) Change the source ip and MAC addresses to match your bare-metal < Done host and the destination ip and MAC addresses to match your bare-metal host's gateway machine . 
+
+4) Starting from your answer to 3, construct a pcap file with two frames: frame 1 as in Q3, and frame 2 going in the opposite direction precisely 1 second later.
+
+5) Change the timezone but still have the packets from 3 occur at the same time.
+
+6) Change the UDP source and or destination ports to mimic a DNS request (do not try and make the UDP payload genuine DNS, only the UDP header).
+
+
+
+
+Extension questions for anyone insufficiently challenged so far:
+E1) From the original, try making the ip payload TCP syn packet rather than UDP.
+
+E2) Extend E1 to include the SYN+ACK response 100 miliseconds later.
+
+E3) Extend E2 to conclude the three way handshake 150 milliseconds later.
+
+E4) Extend E3 to send "Hello, World!"
+
+E5) Extend E4 to close the connection.
+
+E6) Try to IP fragment the original "Hello, World!" UDP datagram into two. Manipulate the break to occur where you chose. 
+
+E7) Experiment with non-conformant frames, packets, datagrams, segments.
+
+E8) Do any of the above but into pcap-ng format
+
+E9) Define interesting, small scale problems for others to tackle

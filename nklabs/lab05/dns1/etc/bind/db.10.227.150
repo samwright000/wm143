@@ -1,0 +1,37 @@
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;Shortcuts and the zone name
+;   The zone name defined by the reference to this file from named.conf.local 
+;     is really important. In this case it is "150.227.10.in-addr.arpa"
+;   * Where there is no trailing '.' (eg 1 NOT 1.) then the zone name 
+;     is appended to the name so 1 becomes 1.150.227.10.in-addr.arpa
+;   * The '@' symbol represents the the zone name
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$TTL    8h
+@	IN      SOA     dns1.cyber.test.    root.cyber.test. (
+		2010012101 ; serial
+		8h         ; refresh
+		2h         ; retry
+		1w         ; expire
+		0          ; negative cache ttl
+		)
+
+;~~~~~~~~~~~~~~~~~
+; nameserver(s)
+;
+@	IN	NS	dns1.cyber.test.
+	IN	NS	dns2.cyber.test.
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; Host pointers to canonical name
+
+; D network (10.227.0.0/16)
+55	IN	PTR	gwW.cyber.test.
+56	IN	PTR	gwX.cyber.test.
+58	IN	PTR	gwZ.cyber.test.
+
+100	IN	PTR	www.cyber.test.
+220	IN	PTR	dns1.cyber.test.
+221	IN	PTR	dns2.cyber.test.
+254	IN	PTR	gw.cyber.test.
+

@@ -1,0 +1,126 @@
+# This example has two captured frames.
+# Generate the binary using the associated hex2bin.sh via:
+#      ./hex2bin.sh < f3 > f3.pcap
+
+# pcap global header
+A1B2C3D4      # magic file type characters
+0002 0004     # version number (pcap 2.4)
+00000000      # UTC timezone
+00000000      # timestamp accuracy (significant figs) - usually zeroed out
+0001000F      # snaplength (max octets that can be captured)
+00000001      # ethernet
+
+  ################################
+  # per frame pcap header frame #1
+  68D3CF32      # time of capture
+  000003DB      # microseconds
+  00000022      # number of octets captured
+  0000003A      # original size of frame
+
+    # ethernet frame header
+    A42B8C 56789A   # destination MAC address
+    DCA632 BA9876   # source MAC address
+    0800            # content is IPv4
+
+    # frame content - IPv4 header RFC 791 (20 bytes)
+
+    # 0                   1                   2                   3
+    # 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|Version|  IHL  |Type of Service|          Total Length         |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|         Identification        |Flags|      Fragment Offset    |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|  Time to Live |    Protocol   |         Header Checksum       |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|                       Source Address                          |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|                    Destination Address                        |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|                    Options                    |    Padding    |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    4     # ip version 4
+    5     # header is five * four byte = 20 bytes long
+    00    # type of service not used
+    002C  # IP header + content size in bytes
+    1357  # irrelevant fragment identifier
+    4     # do not fragment
+    000   # fragment offset (zero)
+    2F    # time to live (47 decimal) hops
+    11    # decimal 17 is UDP (tcp is 6)
+    F116  # packet checksum
+    C0A80101  # source address is 192.168.1.1
+    C0A80102  # dst address 192.168.1.2
+      
+      # UDP header (rfc 768)
+                # 0      7 8     15 16    23 24    31
+                # +--------+--------+--------+--------+
+                # |     Source      |   Destination   |
+                # |      Port       |      Port       |
+                # +--------+--------+--------+--------+
+                # |                 |                 |
+                # |     Length      |    Checksum     |
+                # +--------+--------+--------+--------+
+                # |
+                # |          data octets ...
+                # +---------------- ...
+
+  ################################
+  # per frame pcap header frame #2
+  68D3CF33      # time of capture
+  000003DB      # microseconds
+  00000022      # number of octets captured
+  0000003A      # original size of frame
+
+    # ethernet frame header
+    A42B8C 56789A   # destination MAC address
+    DCA632 BA9876   # source MAC address
+    0800            # content is IPv4
+
+    # frame content - IPv4 header RFC 791 (20 bytes)
+
+    # 0                   1                   2                   3
+    # 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|Version|  IHL  |Type of Service|          Total Length         |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|         Identification        |Flags|      Fragment Offset    |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|  Time to Live |    Protocol   |         Header Checksum       |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|                       Source Address                          |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|                    Destination Address                        |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|                    Options                    |    Padding    |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    4     # ip version 4
+    5     # header is five * four byte = 20 bytes long
+    00    # type of service not used
+    002C  # IP header + content size in bytes
+    1357  # irrelevant fragment identifier
+    4     # do not fragment
+    000   # fragment offset (zero)
+    2F    # time to live (47 decimal) hops
+    11    # decimal 17 is UDP (tcp is 6)
+    F116  # packet checksum
+    C0A80103  # source address is 192.168.1.3
+    C0A80104  # dst address 192.168.1.4
+      
+      # UDP header (rfc 768)
+                # 0      7 8     15 16    23 24    31
+                # +--------+--------+--------+--------+
+                # |     Source      |   Destination   |
+                # |      Port       |      Port       |
+                # +--------+--------+--------+--------+
+                # |                 |                 |
+                # |     Length      |    Checksum     |
+                # +--------+--------+--------+--------+
+                # |
+                # |          data octets ...
+                # +---------------- ...
+
+
+

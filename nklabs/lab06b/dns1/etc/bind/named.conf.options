@@ -1,0 +1,23 @@
+options {
+	directory "/var/cache/bind";
+
+	// If there is a firewall between you and nameservers you want
+	// to talk to, you may need to fix the firewall to allow multiple
+	// ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+	// pdn: 2010-01-21: commented in forwarders which was commented out
+	forwarders {
+		8.8.8.8;
+		8.8.4.4;
+	};
+	forward only;
+	recursion yes;
+	allow-query {
+		172.16.0.0/12;
+		10.227.150.0/24;
+	};
+
+	auth-nxdomain no;    # conform to RFC1035
+	listen-on-v6 { any; };
+};
+

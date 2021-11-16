@@ -1,0 +1,35 @@
+# set each port on the switch with a common MAC address
+# make it look like it was made by 3com Europe :-)
+ip link set dev eth0 address 08:00:4e:a0:0a:00
+ip link set dev eth1 address 08:00:4e:a0:0a:01
+ip link set dev eth2 address 08:00:4e:a0:0a:02
+ip link set dev eth3 address 08:00:4e:a0:0a:03
+ip link set dev eth4 address 08:00:4e:a0:0a:04
+ip link set dev eth5 address 08:00:4e:a0:0a:05
+ip link set dev eth6 address 08:00:4e:a0:0a:06
+ip link set dev eth7 address 08:00:4e:a0:0a:07
+
+ip link set eth0 up
+ip link set eth1 up
+ip link set eth2 up
+ip link set eth3 up
+ip link set eth4 up
+ip link set eth5 up
+ip link set eth6 up
+ip link set eth7 up
+
+# create the bridge (we will call it "sw0" - most examples will use br0)
+# set spanning tree priority
+# set bridge to up (needed to set as master for eth cards)
+ip link add name sw0 type bridge stp_state 1 priority 120
+ip link set sw0 up
+
+# make all of the network cards part of the switch - add one by one
+ip link set eth0 master sw0
+ip link set eth1 master sw0
+ip link set eth2 master sw0
+ip link set eth3 master sw0
+ip link set eth4 master sw0
+ip link set eth5 master sw0
+ip link set eth6 master sw0
+ip link set eth7 master sw0

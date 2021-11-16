@@ -1,0 +1,55 @@
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;Shortcuts and the zone name
+;   The zone name defined by the reference to this file from named.conf.local 
+;     is really important. In this case it is 'cyber.test'
+;   * Where there is no trailing '.' (eg 'm1' NOT 'm1.') then the zone name 
+;     is appended to the name so 'm1' becomes 'm1.cyber.test'
+;   * The '@' symbol represents the the zone name
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$TTL	8h
+@	IN	SOA     dns1.cyber.test.    root.cyber.test. (
+		2012112201 ; serial
+		8h         ; refresh
+		2h         ; retry
+		1w         ; expire
+		0          ; negative cache ttl
+		)
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; nameserver(s)
+@	IN	NS	dns1.cyber.test.
+	IN	NS	dns2.cyber.test.
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; hosts
+dns1	IN	A	10.227.150.220
+dns2	IN	A	10.227.150.221
+www	IN	A	10.227.150.100
+
+m1		IN	A	172.28.97.41
+m2		IN	A	172.28.97.42
+
+m6		IN	A	172.21.62.106
+m7		IN	A	172.21.62.107
+
+m12	IN	A	172.19.78.112
+m13	IN	A	172.19.79.213
+
+m16	IN	A	172.17.33.116
+m17	IN	A	172.17.44.217
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; gateways
+gwW	IN	A	172.28.97.46
+		IN	A	10.227.150.55
+		
+gwX	IN	A	172.21.62.126
+		IN	A	10.227.150.56
+		
+gwY	IN	A	172.19.79.254
+		IN	A	172.17.47.253
+		
+gwZ	IN	A	172.17.47.254
+		IN	A	10.227.150.58
+		
+gw		IN	A	10.227.150.254
+

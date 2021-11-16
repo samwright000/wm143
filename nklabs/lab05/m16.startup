@@ -1,0 +1,2 @@
+ifconfig eth0 172.17.33.116/20
+route add default 172.17.47.254

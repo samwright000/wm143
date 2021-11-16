@@ -1,0 +1,20 @@
+// pn; 2015:  zones added
+// The file path is relative to the directory in the options section
+
+zone "cyber.test" {
+        type slave;
+        file "bak.test.cyber";
+        masters { 10.227.150.220; };
+};
+
+zone "172.in-addr.arpa" {
+        type slave;
+        file "bak.172";
+        masters { 10.227.150.220; };
+};
+
+zone "150.227.10.in-addr.arpa" {
+        type slave;
+        file "bak.10.227.150";
+        masters { 10.227.150.220; };
+};

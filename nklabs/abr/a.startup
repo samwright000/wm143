@@ -1,0 +1,12 @@
+### Machine A ###
+# diagram = https://docs.google.com/drawings/d/1WUqYDKNTN8yCo-L5C_rmo28RaS7OF7u0JjUi_nBeBMw/edit 
+ip link set dev eth0 down 
+ip link set dev eth0 address DC:A6:32:AA:AA:AA 
+ip addr add dev eth0 172.28.97.42/29
+ip link set dev eth0 up 
+
+ip route add default via 172.28.97.41
+#it should be down - stop bit being functional but just incase - ip is the core command - subcommand is link - then what do you want to do with the link, we want to set it - we want to set deveice network card 0 down so that it wont recive traffic so that we can edit it 
+#setting a back address
+# set the address and say there are others 
+# the same as before but instead make it up 
