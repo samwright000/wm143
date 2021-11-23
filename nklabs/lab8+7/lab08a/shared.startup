@@ -1,0 +1,16 @@
+sysctl -p
+
+HOST=$(cat /etc/hostname)
+for i in a b c d e f
+do
+  mkdir -p /var/tar-stuff/$HOST/$i
+  for j in 1 2 3 4 5 6
+  do
+    for k in $(seq 100)
+    do
+      echo "# $k: FAKE FILE from: host=\"$HOST\", file=\"/var/tar-stuff/$HOST/$i/$i$j\" " >> /var/tar-stuff/$HOST/$i/$i$j
+    done
+  done
+done
+
+

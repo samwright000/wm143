@@ -1,0 +1,48 @@
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;Shortcuts and the zone name
+;   The zone name defined by the reference to this file from named.conf.local 
+;     is really important. In this case it is "172.in-addr.arpa"
+;   * Where there is no trailing '.' (eg 1.2.3 NOT 1.2.3.) then the zone name 
+;     is appended to the name so 1.2.3 becomes 1.2.3.172.in-addr.arpa
+;   * The '@' symbol represents the the zone name
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$TTL    8h
+@	IN      SOA     dns1.cyber.test.    root.cyber.test. (
+		2010012101 ; serial
+		8h         ; refresh
+		2h         ; retry
+		1w         ; expire
+		0          ; negative cache ttl
+		)
+
+;~~~~~~~~~~~~~~~~~
+; nameserver(s)
+;
+@	IN	NS	dns1.cyber.test.
+	IN	NS	dns2.cyber.test.
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; Host pointers to canonical name
+
+; "W" network (172.28.97.40/29)
+41.97.28	IN	PTR	m1.cyber.test.
+42.97.28	IN	PTR	m2.cyber.test.
+46.97.28	IN	PTR	gwW.cyber.test.
+
+; "X" network (172.21.62.96/27)
+106.62.21	IN	PTR	m6.cyber.test.
+107.62.21	IN	PTR	m7.cyber.test.
+126.62.21	IN	PTR	gwX.cyber.test.
+
+; "Y" network (172.19.78.0/23)
+112.78.19	IN	PTR	m12.cyber.test.
+213.79.19	IN	PTR	m13.cyber.test.
+254.79.19	IN	PTR	gwY.cyber.test.
+
+; "Z" network (172.17.32.0/20)
+116.33.17	IN	PTR	m16.cyber.test.
+117.44.17	IN	PTR	m17.cyber.test.
+253.47.17	IN	PTR	gwY.cyber.test.
+254.47.17	IN	PTR	gwZ.cyber.test.
+

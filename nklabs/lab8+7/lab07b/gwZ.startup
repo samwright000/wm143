@@ -1,0 +1,69 @@
+ip addr add 172.17.47.254/20 dev eth0
+ip addr add 10.227.150.58/16 dev eth1
+
+ip link set up dev eth0
+ip link set up dev eth1
+
+ip route add 172.28.97.40/29 via 10.227.150.55
+ip route add 172.21.62.96/27 via 10.227.150.56
+ip route add 172.19.78.0/23 via 172.17.47.253
+# ip route add 172.17.32.0/20 via 10.227.150.58
+ip route add default via 10.227.150.254
+
+############## tftp setup #################
+# create some files to serve in tptpd root dir
+for i in a b c d e f
+do
+  mkdir -p /srv/tftp/$i
+  for j in 1 2 3 4 5 6
+  do
+    echo "# FAKE FILE $i$i$i $j$j$j" | cat - /etc/services > /srv/tftp/$i/$i$j
+  done
+done
+
+# start the tftpd server (without starting telnet!)
+# see /etc/inetd.conf for what is going on
+update-inetd --disable telnet
+update-inetd --enable tftp
+service openbsd-inetd start
+netstat -an
+
+#
+#                   W
+#            172.28.97.40/29
+#    --+------------+-------------+--              D
+#      |            |             |           10.227.0.0/16
+#      |.41         |.42          |.46        +-----------------
+#   +-----+      +-----+       +-----+        |
+#   | m1  |      | m2  |       | gw_W|.150.55 |
+#   +-----+      +-----+       |     |--------+
+#                              +-----+        |
+#                   X                         |
+#            172.21.62.96/27                  | .150.254 +----
+#    --+------------+-------------+--         +----------| gw_INTERNET >>>
+#      |            |             |           |          +----
+#      |.106        |.107         |.126       |
+#   +-----+      +-----+       +-----+        |
+#   | m6  |      | m7  |       | gw_X|.150.56 |
+#   +-----+      +-----+       |     |--------+
+#                              +-----+        |
+#                   Y                         |
+#           172.19.78.0/23                    | .150.220 +-----+
+#    --+------------+-------------+--         +----------|dns1 |
+#      |            |             |           |          +-----+
+#      |78.112      |79.213       |79.254     |
+#   +-----+      +-----+       +-----+        |
+#   | m12 |      | m13 |       | gw_Y|        |
+#   +-----+      +-----+       |     |        |
+#                              +--+--+        |
+#                   Z             |.47.253    |
+#            172.17.32.0/20       |           |
+#    --+------------+-------------+--         |
+#      |            |             |           |
+#      |33.116      |44.217       |.47.254    |
+#   +-----+      +-----+       +-----+        |
+#   | m16 |      | m17 |       | gw_Z|.150.58 |
+#   +-----+      +-----+       |     |--------+
+#                              +-----+        |
+
+
