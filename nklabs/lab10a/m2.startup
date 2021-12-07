@@ -1,0 +1,3 @@
+# bring up the interfaces according to the settings in
+#  /etc/network/interfaces
+ifup eth0

@@ -1,0 +1,16 @@
+// pn; 2015: zone definitions
+
+zone "cyber.test" {
+        type master;
+        file "/etc/bind/db.test.cyber";
+};
+
+zone "172.in-addr.arpa" {
+        type master;
+        file "/etc/bind/db.172";
+};
+
+zone "150.227.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/db.10.227.150";
+};

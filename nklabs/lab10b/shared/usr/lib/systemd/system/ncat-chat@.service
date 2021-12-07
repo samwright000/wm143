@@ -1,0 +1,10 @@
+[Unit]
+Description=Ncat TCP Chat Service
+After=networking.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ncat --chat --output /var/log/ncat-chat%i -lp %i 
+
+[Install]
+WantedBy=multi-user.target
